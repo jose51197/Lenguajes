@@ -1,12 +1,13 @@
 package com.example.jose5.lenguajes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by jose5 on 2/20/2018.
  */
 
-public class User {
+public class User implements Serializable {
     String user;
     String pass;
     ArrayList<Event> events=new ArrayList<>();

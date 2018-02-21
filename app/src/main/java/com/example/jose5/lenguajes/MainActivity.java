@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText user =  (EditText) findViewById(R.id.loginUserText);
         final EditText pass =  (EditText) findViewById(R.id.loginPassText);
-
         Button buttonLogin = (Button) findViewById(R.id.loginOk);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -30,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
                 for(User u : users){
                     if(u.getUser().equals(user.getText().toString()) && u.login(pass.getText().toString())){//if the user exists open the new window with the user
                         Intent next = new Intent(MainActivity.this, Logged_in_activity.class);
-                        next.putExtra("User",u.getUser());
+                        next.putExtra("User",u);
                         startActivity(next);
                         notificate("Logged in");
                         break;
                     }
                 }
-                notificate("User not found/wrong pass");
+
+
 
 
             }

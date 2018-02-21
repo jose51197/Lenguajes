@@ -5,15 +5,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-public class Logged_in_activity extends AppCompatActivity  {
-    String user;
+import java.io.Serializable;
+
+public class Logged_in_activity extends AppCompatActivity implements Serializable {
+    User logged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logged_in);
+        logged = (User) getIntent().getSerializableExtra("User");//get the loggedIn user object back from previous intent
+
+        /*Button  = (Button) findViewById(R.id.loginOk);
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
     }
 
     @Override
@@ -28,7 +43,6 @@ public class Logged_in_activity extends AppCompatActivity  {
         switch (item.getItemId()) {
             case R.id.Overwrite:
                 Intent next = new Intent(Logged_in_activity.this, Overwrite_activity.class);
-                //next.putExtra("user",user);
                 startActivity(next);
                 return true;
             default:

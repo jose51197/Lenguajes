@@ -1,12 +1,13 @@
 package com.example.jose5.lenguajes;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by jose5 on 2/20/2018.
  */
 
-public class Event {
+public class Event implements Serializable {
     Date date;
     String location;
     String name;
