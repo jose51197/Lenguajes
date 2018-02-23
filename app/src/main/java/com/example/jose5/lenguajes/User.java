@@ -23,6 +23,26 @@ public class User implements Serializable {
         }
         return false;
     }
+    public void addEvent(Event e){
+        events.add(e);
+    }
+
+    public void deleteEvent(int i){
+        if(events.size()>i){
+            events.remove(i);
+        }
+
+    }
+    public String consult(int i){
+        if(events.size()>i){
+            return events.get(i).consult();
+        }
+        return "";
+    }
+
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
 
     public String getUser() {
         return user;

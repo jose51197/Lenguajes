@@ -6,16 +6,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Logged_in_activity extends AppCompatActivity implements Serializable {
     User logged;
-
+    ArrayAdapter<String> arrayAdapter;
+    ListView list;
+    int selected=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +28,27 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
         logged = (User) getIntent().getSerializableExtra("User");//get the loggedIn user object back from previous intent
 
         Button buttonDelete  = (Button) findViewById(R.id.delete);
-        ListView list = (ListView) findViewById(R.id.listView);
+        list = (ListView) findViewById(R.id.listView);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+            {
+                selected= position;
+                notificate(logged.consult(selected));
+            }
+        });
 
         //When the user presses the delete button
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                logged.deleteEvent(selected);
+                update();
             }
         });
+
 
         Button buttonNew  = (Button) findViewById(R.id.newEvent);
         //When the user presses the new button
@@ -42,6 +59,7 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
                 next.putExtra("User",logged);
                 startActivity(next);
                 notificate("Creating new");
+                finish();
             }
         });
 
@@ -53,7 +71,25 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
 
             }
         });
+        update();
 
+
+
+
+    }
+    public void update(){
+        //get every activity from user
+        ArrayList<String> eventList = new ArrayList<>();
+
+        for(Event e: logged.events){
+            eventList.add(e.toString());
+        }
+        arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                eventList );
+
+        list.setAdapter(arrayAdapter);
     }
 
     @Override

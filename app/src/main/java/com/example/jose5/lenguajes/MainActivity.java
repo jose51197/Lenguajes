@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                         next.putExtra("User",u);
                         startActivity(next);
                         notificate("Logged in");
+                        finish();
                         break;
                     }
                 }

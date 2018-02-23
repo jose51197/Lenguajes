@@ -18,6 +18,15 @@ public class Event implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String consult(){
+        return location + " - "+date.toString();
+    }
+
     public Date getDate() {
         return date;
     }
