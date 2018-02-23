@@ -38,12 +38,15 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
         buttonNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent next = new Intent(Logged_in_activity.this, New_Activity.class);
+                next.putExtra("User",logged);
+                startActivity(next);
+                notificate("Creating new");
             }
         });
 
-        Button buttonFilter  = (Button) findViewById(R.id.newEvent);
-        //When the user presses the new button
+        Button buttonFilter  = (Button) findViewById(R.id.filter);
+        //When the user presses the filter button
         buttonFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
