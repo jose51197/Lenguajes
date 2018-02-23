@@ -58,7 +58,6 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
                 Intent next = new Intent(Logged_in_activity.this, New_Activity.class);
                 next.putExtra("User",logged);
                 startActivity(next);
-                notificate("Creating new");
                 finish();
             }
         });
