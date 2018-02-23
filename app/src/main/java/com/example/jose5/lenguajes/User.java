@@ -10,11 +10,12 @@ import java.util.ArrayList;
 public class User implements Serializable {
     String user;
     String pass;
-    ArrayList<Event> events=new ArrayList<>();
+    ArrayList<Event> events;
 
     public User(String user, String pass) {
         this.user = user;
         this.pass = pass;
+        events=new ArrayList<>();
     }
 
     public boolean login(String password){

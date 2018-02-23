@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class Overwrite_activity extends AppCompatActivity {
     User logged;
+    ArrayList<User> users;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class Overwrite_activity extends AppCompatActivity {
         final EditText pass =  (EditText) findViewById(R.id.owPass);
 
         logged = (User) getIntent().getSerializableExtra("User");
+        users = (ArrayList<User>) getIntent().getSerializableExtra("Users");
         user.setText(logged.getUser());
 
         Button buttonOver  = (Button) findViewById(R.id.overwriteOk);
@@ -30,7 +33,9 @@ public class Overwrite_activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent next = new Intent(Overwrite_activity.this, Logged_in_activity.class);
                 logged.change(user.getText().toString(),pass.getText().toString());
+                notificate(user.getText().toString()+ ":"+pass.getText().toString());
                 next.putExtra("User",logged);
+                next.putExtra("Users",users);
                 startActivity(next);
                 finish();
             }

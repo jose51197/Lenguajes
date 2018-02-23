@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class New_Activity extends AppCompatActivity {
 
     User logged;
+    ArrayList<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class New_Activity extends AppCompatActivity {
         setContentView(R.layout.new_event);
 
         logged = (User) getIntent().getSerializableExtra("User");//get the loggedIn user object back from previous intent
-
+        users = (ArrayList<User>) getIntent().getSerializableExtra("Users");
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
@@ -47,6 +48,7 @@ public class New_Activity extends AppCompatActivity {
                 logged.addEvent(new Event(getDateFromDatePicker(date),name.getText().toString(),location.getText().toString()));
                 Intent next = new Intent(New_Activity.this, Logged_in_activity.class);
                 next.putExtra("User",logged);
+                next.putExtra("Users",users);
                 startActivity(next);
                 finish();
             }
