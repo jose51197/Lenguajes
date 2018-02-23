@@ -101,10 +101,10 @@ public class Logged_in_activity extends AppCompatActivity implements Serializabl
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        notificate("entered");
         switch (item.getItemId()) {
             case R.id.Overwrite:
                 Intent next = new Intent(Logged_in_activity.this, Overwrite_activity.class);
+                next.putExtra("User",logged);
                 startActivity(next);
                 return true;
             default:

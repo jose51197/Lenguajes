@@ -40,6 +40,11 @@ public class User implements Serializable {
         return "";
     }
 
+    public void change(String user, String pass){
+        this.user=user;
+        this.pass=pass;
+    }
+
     public ArrayList<Event> getEvents() {
         return events;
     }

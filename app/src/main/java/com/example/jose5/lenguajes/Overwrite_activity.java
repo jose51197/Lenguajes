@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Overwrite_activity extends AppCompatActivity {
-
+    User logged;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +20,21 @@ public class Overwrite_activity extends AppCompatActivity {
         final EditText user =  (EditText) findViewById(R.id.owUser);
         final EditText pass =  (EditText) findViewById(R.id.owPass);
 
-        //user.setText(getIntent().getStringExtra("user"));
-        //pass.setText(getIntent().getStringExtra("pass"));
+        logged = (User) getIntent().getSerializableExtra("User");
+        user.setText(logged.getUser());
 
+        Button buttonOver  = (Button) findViewById(R.id.overwriteOk);
+        //When the user presses the new button
+        buttonOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next = new Intent(Overwrite_activity.this, Logged_in_activity.class);
+                logged.change(user.getText().toString(),pass.getText().toString());
+                next.putExtra("User",logged);
+                startActivity(next);
+                finish();
+            }
+        });
 
 
 
